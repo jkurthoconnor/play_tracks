@@ -1,4 +1,5 @@
 require "play_tracks/version"
+require "play_tracks/array"
 
 module PlayTracks
   class Application
@@ -6,7 +7,7 @@ module PlayTracks
       `echo debug > debug`;
       [200,
        {'Content-Type' => 'text/html'},
-       ["Hello from Ruby on Play Tracks."]]
+       [[1,2,3,4].prepend_count.to_s] ]
     end
   end
 
