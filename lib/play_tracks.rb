@@ -7,7 +7,7 @@ module PlayTracks
       `echo debug > debug`;
       [200,
        {'Content-Type' => 'text/html'},
-       [[1,2,3,4].prepend_count.to_s] ]
+       ["Hello, there", [1,2,3,4].prepend_count.to_s] ]
     end
   end
 
