@@ -3,6 +3,7 @@ require "play_tracks/version"
 module PlayTracks
   class Application
     def call(env)
+      `echo debug > debug`;
       [200,
        {'Content-Type' => 'text/html'},
        ["Hello from Ruby on Play Tracks."]]
