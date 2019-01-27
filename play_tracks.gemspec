@@ -39,5 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
 
-  spec.add_runtime_dependency "rack", "~> 1.4.7"
+  spec.add_runtime_dependency "rack", "~> 2.0"
 end
