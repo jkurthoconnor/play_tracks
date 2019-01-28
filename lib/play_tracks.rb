@@ -5,14 +5,24 @@ require "play_tracks/routing"
 module PlayTracks
   class Application
     def call(env)
-      `echo debug > debug`;
       if env["PATH_INFO"].include?('favicon')
         return [404, {'Content-Type' => 'text/html'}, []]
       end
 
-      klass, act = get_controller_and_action(env)
+      if env["PATH_INFO"].eql?("/")
+        contr = "HomeController"
+        klass, act = [Object.const_get(contr), "index"]
+      else
+        klass, act = get_controller_and_action(env)
+      end
+
       controller = klass.new(env)
-      text = controller.send(act)
+      text = begin 
+               controller.send(act)
+             rescue
+               raise "That was stupid. Try something else."
+             end
+
       [200, {'Content-Type' => 'text/html'}, [ text ]]
     end
   end
