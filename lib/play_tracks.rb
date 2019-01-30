@@ -1,6 +1,8 @@
 require "play_tracks/version"
 require "play_tracks/array"
 require "play_tracks/routing"
+require "play_tracks/util"
+require "play_tracks/dependencies"
 
 module PlayTracks
   class Application
@@ -16,6 +18,10 @@ module PlayTracks
         klass, act = get_controller_and_action(env)
       end
 
+      # apparently, via some magic when Object.const_get returns 
+      # what ammounts to the file name, this is used to  load the file,
+      # thus the class within it, so `klass.new` works b/c `klass` references
+      # the class itself, not the file
       controller = klass.new(env)
       text = begin 
                controller.send(act)
@@ -40,7 +46,7 @@ module PlayTracks
     def env_list
       list = "<ul>"
 
-      @env.each do |k,v|
+      env.each do |k,v|
         list << "<li>#{k}=> #{v}</li>"
       end
 
